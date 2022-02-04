@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplenode
+  labels:
+    app: simplenode
+spec:
+  selector:
+    matchLabels:
+      app: simplenode
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: simplenode
+    spec:
+      containers:
+        - name: simplenode
+          image: marcouellet/simplenodejsk8smaster:latest
+          env:
+            - name: APP_NAME
+              value: "simplenode"
+            - name: TEST_ME
+              value: "Hello, world!"
+            - name: K8_NODE
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: K8_POD
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: K8_NS
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: PORT
+              value: "4444"
+          ports:
+            - containerPort: 4444
+              name: simplenode
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simplenode
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 4444
+  selector:
+    app: simplenode
