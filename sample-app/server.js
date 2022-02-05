@@ -5,7 +5,7 @@ var hostname = os.hostname();
 var qs = require("qs");
 var moment = require("moment");
 
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3000;
 
 function handleRequest(request, response) {
   response.end(
