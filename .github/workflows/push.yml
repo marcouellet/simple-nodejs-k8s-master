@@ -40,4 +40,5 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: docker push
+        uses: actions/checkout@master
       - run: docker push marcouellet/simple-nodejs-k8s-master
