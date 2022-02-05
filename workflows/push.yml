@@ -1,4 +1,4 @@
-on: push 
+on: push
 
 name: npm build, lint, test and publish
 
@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+      - run: cd sample-app
 
       - name: npm install
         uses: actions/setup-node@v2
@@ -39,6 +40,6 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
-      - name: docker push 
+      - name: docker push
         uses: actions/checkout@master
       - run: docker push marcouellet/simple-nodejs-k8s-master
