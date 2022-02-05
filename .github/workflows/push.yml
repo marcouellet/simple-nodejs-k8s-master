@@ -24,9 +24,9 @@ jobs:
       #       run: npm test
       #       working-directory: sample-app
 
-      - name: npm lint
-        run: npm lint
-        working-directory: sample-app
+      #- name: npm lint
+      #  run: npm lint
+      #  working-directory: sample-app
 
       - name: docker build
         run: docker build -t marcouellet/simple-nodejs-k8s-master .
