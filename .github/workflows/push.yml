@@ -17,19 +17,19 @@ jobs:
           node-version: "14"
 
       - name: npm install
-      - run: npm install
+        run: npm install
         working-directory: sample-app
 
       - name: npm test
-      - run: npm test
+        run: npm test
         working-directory: sample-app
 
       - name: npm lint
-      - run: npm lint
+        run: npm lint
         working-directory: sample-app
 
       - name: docker build
-      - run: docker build -t marcouellet/simple-nodejs-k8s-master .
+        run: docker build -t marcouellet/simple-nodejs-k8s-master .
         working-directory: sample-app
 
       - name: docker login
