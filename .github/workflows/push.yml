@@ -30,9 +30,8 @@ jobs:
       - run: npm lint
 
       - name: docker build
-        uses: actions-hub/docker@master
-        with:
-          args: build -t marcouellet/simple-nodejs-k8s-master .
+        uses: actions/checkout@master
+      - run: docker build -t marcouellet/simple-nodejs-k8s-master .
 
       - name: docker login
         uses: actions/docker/login@master
@@ -41,6 +40,4 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: docker push
-        uses: actions-hub/docker@master
-        with:
-          args: push marcouellet/simple-nodejs-k8s-master
+      - run: docker push marcouellet/simple-nodejs-k8s-master
