@@ -34,7 +34,7 @@ jobs:
       - run: docker build -t marcouellet/simple-nodejs-k8s-master .
 
       - name: docker login
-        uses: actions/docker/login@master
+        uses: actions-hub/docker/login@master
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
