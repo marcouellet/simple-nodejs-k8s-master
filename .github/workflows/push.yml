@@ -66,6 +66,8 @@ jobs:
           login-server: "simplenodejsk8smaster.azurecr.io"
           username: ${{ secrets.AZURE_CONTAINER_ACCESS_USERNAME }}
           password: ${{ secrets.AZURE_CONTAINER_ACCESS_PASSWORD }}
+
+      - name: Run docker Build and Push
         run: |
           docker build . -t simplenodejsk8smaster.azurecr.io/simple-nodejs-k8s-master-develop:latest
           docker push simplenodejsk8smaster.azurecr.io/simple-nodejs-k8s-master-develop:latest
