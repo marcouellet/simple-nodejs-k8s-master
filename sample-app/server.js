@@ -11,7 +11,7 @@ function handleRequest(request, response) {
   response.end(
     "[" +
       hostname +
-      "] Serving requests from simple nodejs k8s master ***dev***. Request URL:" +
+      "] Serving requests from simple nodejs k8s master *** development ***. Request URL:" +
       request.url
   );
 }
