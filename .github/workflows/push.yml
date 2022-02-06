@@ -40,7 +40,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          registry: marcouellet/simple-nodejs-k8s-master
 
       - name: docker images
         run: docker images
