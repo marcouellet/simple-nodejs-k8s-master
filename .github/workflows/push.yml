@@ -43,6 +43,9 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
+      - name: docker images
+        run: docker images
+
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
