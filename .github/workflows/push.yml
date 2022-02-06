@@ -38,10 +38,9 @@ jobs:
       - name: docker login
         uses: docker/login-action@v1
         with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           registry: marcouellet/simple-nodejs-k8s-master
-        env:
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: docker images
         run: docker images
