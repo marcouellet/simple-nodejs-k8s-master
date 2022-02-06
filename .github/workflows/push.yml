@@ -39,5 +39,8 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
 
       - name: docker push
-        run: docker push marcouellet/simple-nodejs-k8s-master
-        working-directory: sample-app
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: marcouellet/simple-nodejs-k8s-master:latest
+
