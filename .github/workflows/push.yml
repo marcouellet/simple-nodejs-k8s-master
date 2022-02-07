@@ -23,7 +23,7 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: docker login
+      - name: Docker Hub login
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
@@ -37,4 +37,37 @@ jobs:
         with:
           context: ./sample-app
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simple-nodejs-k8s-master:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simple-nodejs-k8s-master-prod:latest
+
+  upload_to_azure_registry:
+    defaults:
+      run:
+        working-directory: sample-app
+
+    name: upload to azure repository
+    runs-on: ubuntu-latest
+    needs: build-and-publish
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: setup nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: npm install
+        run: npm install
+
+      - name: Azure repository login
+        uses: azure/docker-login@v1
+        with:
+          login-server: "simplenodejsk8smaster.azurecr.io"
+          username: ${{ secrets.AZURE_CONTAINER_ACCESS_USERNAME }}
+          password: ${{ secrets.AZURE_CONTAINER_ACCESS_PASSWORD }}
+
+      - name: Run docker Build and Push
+        run: |
+          docker build . -t simplenodejsk8smaster.azurecr.io/simple-nodejs-k8s-master-prod:latest
+          docker push simplenodejsk8smaster.azurecr.io/simple-nodejs-k8s-master-prod:latest
